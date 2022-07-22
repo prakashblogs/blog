@@ -26,35 +26,8 @@ jobs:
 
       - name: generate hugo site
         run: |
-          ls -R
           cd blog/myblog
-          pwd
-          ls -a
           hugo -t hugo-theme-texify -d ../../prakashblogs.github.io/blog
-
-      # - name: change dir for prakashblogs
-      #   run: |
-      #     mkdir prakashblogs
-      #     cd prakashblogs
-
-
-      # - name: delete blog folder from prakashblogs
-      #   run: |
-      #     pwd
-      #     ls
-      #     rm -rf blog
-      #     echo "blog folder deleted "
-      #     cp myblog/public prakashblogs/blog
-      #     echo "copied"
-      
-      # - name: commit and push prakashblogs to remote
-      #   run: |
-      #     cd prakashblogs.github.io
-      #     git config user.name rpeb
-      #     git config user.email prakashdubey1999@gmail.com
-      #     ls -a
-      #     git add .
-      #     git commit -m "blog added"
         
       - name: push to prakashblogs repo
         uses: cpina/github-action-push-to-another-repository@main
