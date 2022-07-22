@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prakash&#39;s web logs</title>
+    <link>https://prakashblogs.github.io/blog/</link>
+    <description>Recent content on Prakash&#39;s web logs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>prakashdubey1999@gmail.com (Prakash Dubey)</managingEditor>
+    <webMaster>prakashdubey1999@gmail.com (Prakash Dubey)</webMaster>
+    <lastBuildDate>Sun, 17 Jul 2022 23:36:54 +0530</lastBuildDate><atom:link href="https://prakashblogs.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spin Up a MsSQL Server in Docker</title>
+      <link>https://prakashblogs.github.io/blog/post/spin-up-a-mssql-server-in-docker/</link>
+      <pubDate>Sun, 17 Jul 2022 23:36:54 +0530</pubDate>
+      <author>prakashdubey1999@gmail.com (Prakash Dubey)</author>
+      <guid>https://prakashblogs.github.io/blog/post/spin-up-a-mssql-server-in-docker/</guid>
+      
+      <description>&lt;p&gt;You plan to build an application that talks to a database, but you&amp;rsquo;re procrastinating the idea because you don&amp;rsquo;t want to go through the hassle of doing all the database setup yourself.&lt;/p&gt;
+&lt;p&gt;Tadaa.., we have Docker to the rescue. Docker is an example of what we call &lt;em&gt;containerization tool&lt;/em&gt; in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their &lt;a href=&#34;https://www.docker.com/get-started/&#34;&gt;getting started&lt;/a&gt; page.&lt;/p&gt;
+&lt;p&gt;Now that we have docker running on our machine, let us go through these simple steps to run a sql server inside docker.&lt;/p&gt;
+&lt;h4 id=&#34;creating-a-docker-compose-file&#34;&gt;Creating a Docker Compose File&lt;/h4&gt;
+&lt;p&gt;A docker compose file is a simple text file with &lt;code&gt;.yml&lt;/code&gt; extension, where we write all the steps required to get our service(mssql server in our case) up and running inside docker.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a file and name it as &lt;em&gt;sqlserver.yml&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Open the file and paste the following&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;version: &amp;#34;3&amp;#34;
+services:
+ sqlserver:
+   image: &amp;#34;mcr.microsoft.com/mssql/&amp;gt;server:2019-latest&amp;#34;
+   container_name: sql
+   environment:
+     SA_PASSWORD: &amp;#34;myPassword8&amp;#34;
+     ACCEPT_EULA: &amp;#34;Y&amp;#34;
+   ports:
+     - &amp;#34;1433:1433&amp;#34;
+   volumes:
+     - &amp;#34;sqlservervolume:/var/opt/mssql&amp;#34;
+volumes:
+ sqlservervolume:
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Set your desired password in &lt;em&gt;SA_PASSWORD&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;running-the-compose-file&#34;&gt;Running the compose file&lt;/h4&gt;
+&lt;p&gt;We will run the &lt;code&gt;docker-compose&lt;/code&gt; command and pass the &lt;code&gt;sqlserver.yml&lt;/code&gt; file as argument.
+But before that make sure you have opened a CLI and you are in the same directory as the compose file. Then run the following command&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;docker-compose -f sqlserver.yml up&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;port-mapping&#34;&gt;Port Mapping&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Here we understand the connectivity between host machine and the docker container.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The above command will start up a new container named &lt;em&gt;sql&lt;/em&gt; where the server would be running and listening on port &lt;code&gt;1433&lt;/code&gt;. Now the question is how do we connect to the server running on the port &lt;code&gt;1433&lt;/code&gt; of the container?&lt;/p&gt;
+&lt;p&gt;To answer that we will have to understand the concept of &lt;em&gt;port mapping&lt;/em&gt;. Let us take a look at our &lt;em&gt;yml&lt;/em&gt; file, where we have a &lt;em&gt;ports&lt;/em&gt; section in which we have written &lt;code&gt;1433:1433&lt;/code&gt; what does this do?
+This is where port mapping happens. We have instructed docker that the container port &lt;code&gt;1433&lt;/code&gt; on the right of the colon), should be mapped to &lt;code&gt;1433&lt;/code&gt; port on the host machine(left hand side of the colon).&lt;/p&gt;
+&lt;p&gt;This enables us to talk to the database on &lt;code&gt;1433&lt;/code&gt; port of our machine, as it &lt;em&gt;relays&lt;/em&gt; the messages to &lt;code&gt;1433&lt;/code&gt; port inside the container.&lt;/p&gt;
+&lt;p&gt;To understand it better, we could have mapped any other free port of our host to &lt;code&gt;1433&lt;/code&gt; port of the container, like &lt;code&gt;9034:1433&lt;/code&gt; and it would still run the same, only difference is that now we would connect to the database from our application on port &lt;code&gt;9034&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;stopping-the-server&#34;&gt;Stopping the server&lt;/h4&gt;
+&lt;p&gt;This is all that you need to do to get started with a running database and get on with your project. Of course you would ask, how to stop the server when you don&amp;rsquo;t want to keep the database running. Since our server is being run inside docker, we will let docker handle the shutdown of the server, by executing the command to stop the container itself.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;docker stop sql&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>

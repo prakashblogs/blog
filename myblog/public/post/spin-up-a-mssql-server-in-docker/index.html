@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="Prakash Dubey">
+
+  
+  
+  <meta name="description" content="You plan to build an application that talks to a database, but you&rsquo;re procrastinating the idea because you don&rsquo;t want to go through the hassle of doing all the database setup yourself.
+Tadaa.., we have Docker to the rescue. Docker is an example of what we call containerization tool in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their getting started page.">
+  
+
+  
+  <link rel="icon" href="https://prakashblogs.github.io/blog/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" hugo  latex  theme ">
+  
+
+  
+  
+
+  
+  <meta property="og:title" content="Spin Up a MsSQL Server in Docker" />
+<meta property="og:description" content="You plan to build an application that talks to a database, but you&rsquo;re procrastinating the idea because you don&rsquo;t want to go through the hassle of doing all the database setup yourself.
+Tadaa.., we have Docker to the rescue. Docker is an example of what we call containerization tool in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their getting started page." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://prakashblogs.github.io/blog/post/spin-up-a-mssql-server-in-docker/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-17T23:36:54+05:30" />
+<meta property="article:modified_time" content="2022-07-17T23:36:54+05:30" />
+
+
+
+  
+  <link rel="canonical" href="https://prakashblogs.github.io/blog/post/spin-up-a-mssql-server-in-docker/">
+
+  
+  
+  <meta itemprop="name" content="Spin Up a MsSQL Server in Docker">
+<meta itemprop="description" content="You plan to build an application that talks to a database, but you&rsquo;re procrastinating the idea because you don&rsquo;t want to go through the hassle of doing all the database setup yourself.
+Tadaa.., we have Docker to the rescue. Docker is an example of what we call containerization tool in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their getting started page."><meta itemprop="datePublished" content="2022-07-17T23:36:54+05:30" />
+<meta itemprop="dateModified" content="2022-07-17T23:36:54+05:30" />
+<meta itemprop="wordCount" content="504">
+<meta itemprop="keywords" content="" />
+
+  
+  <link media="screen" rel="stylesheet" href='https://prakashblogs.github.io/blog/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://prakashblogs.github.io/blog/css/content.css'>
+
+  
+  
+  <title>Spin Up a MsSQL Server in Docker - Prakash&#39;s web logs</title>
+  
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spin Up a MsSQL Server in Docker"/>
+<meta name="twitter:description" content="You plan to build an application that talks to a database, but you&rsquo;re procrastinating the idea because you don&rsquo;t want to go through the hassle of doing all the database setup yourself.
+Tadaa.., we have Docker to the rescue. Docker is an example of what we call containerization tool in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their getting started page."/>
+
+
+  
+<link rel="stylesheet" href='https://prakashblogs.github.io/blog/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://prakashblogs.github.io/blog">Prakash&#39;s web logs</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/blog/post/">Archives</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Spin Up a MsSQL Server in Docker</h1>
+  
+  
+  <article class="content">
+    
+    <p>You plan to build an application that talks to a database, but you&rsquo;re procrastinating the idea because you don&rsquo;t want to go through the hassle of doing all the database setup yourself.</p>
+<p>Tadaa.., we have Docker to the rescue. Docker is an example of what we call <em>containerization tool</em> in the technical lingo. Here we are gonna skip through the download and installation of Docker, you can find the detailed instructions depending on your machine type on their <a href="https://www.docker.com/get-started/">getting started</a> page.</p>
+<p>Now that we have docker running on our machine, let us go through these simple steps to run a sql server inside docker.</p>
+<h4 id="creating-a-docker-compose-file">Creating a Docker Compose File</h4>
+<p>A docker compose file is a simple text file with <code>.yml</code> extension, where we write all the steps required to get our service(mssql server in our case) up and running inside docker.</p>
+<ol>
+<li>Create a file and name it as <em>sqlserver.yml</em></li>
+<li>Open the file and paste the following</li>
+</ol>
+<blockquote>
+<pre tabindex="0"><code>version: &#34;3&#34;
+services:
+ sqlserver:
+   image: &#34;mcr.microsoft.com/mssql/&gt;server:2019-latest&#34;
+   container_name: sql
+   environment:
+     SA_PASSWORD: &#34;myPassword8&#34;
+     ACCEPT_EULA: &#34;Y&#34;
+   ports:
+     - &#34;1433:1433&#34;
+   volumes:
+     - &#34;sqlservervolume:/var/opt/mssql&#34;
+volumes:
+ sqlservervolume:
+</code></pre><ol start="3">
+<li>Set your desired password in <em>SA_PASSWORD</em></li>
+</ol>
+</blockquote>
+<h4 id="running-the-compose-file">Running the compose file</h4>
+<p>We will run the <code>docker-compose</code> command and pass the <code>sqlserver.yml</code> file as argument.
+But before that make sure you have opened a CLI and you are in the same directory as the compose file. Then run the following command</p>
+<blockquote>
+<p><code>docker-compose -f sqlserver.yml up</code></p>
+</blockquote>
+<h4 id="port-mapping">Port Mapping</h4>
+<blockquote>
+<p>Here we understand the connectivity between host machine and the docker container.</p>
+</blockquote>
+<p>The above command will start up a new container named <em>sql</em> where the server would be running and listening on port <code>1433</code>. Now the question is how do we connect to the server running on the port <code>1433</code> of the container?</p>
+<p>To answer that we will have to understand the concept of <em>port mapping</em>. Let us take a look at our <em>yml</em> file, where we have a <em>ports</em> section in which we have written <code>1433:1433</code> what does this do?
+This is where port mapping happens. We have instructed docker that the container port <code>1433</code> on the right of the colon), should be mapped to <code>1433</code> port on the host machine(left hand side of the colon).</p>
+<p>This enables us to talk to the database on <code>1433</code> port of our machine, as it <em>relays</em> the messages to <code>1433</code> port inside the container.</p>
+<p>To understand it better, we could have mapped any other free port of our host to <code>1433</code> port of the container, like <code>9034:1433</code> and it would still run the same, only difference is that now we would connect to the database from our application on port <code>9034</code>.</p>
+<h4 id="stopping-the-server">Stopping the server</h4>
+<p>This is all that you need to do to get started with a running database and get on with your project. Of course you would ask, how to stop the server when you don&rsquo;t want to keep the database running. Since our server is being run inside docker, we will let docker handle the shutdown of the server, by executing the command to stop the container itself.</p>
+<blockquote>
+<p><code>docker stop sql</code></p>
+</blockquote>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a></a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2022</span> -
+    <span>2022</span>
+  </div>
+
+  <div class="footnote">
+    <span>Follow me on <a class=link href=https://github.com/rpeb>GitHub</a>,
+<a class=link href=https://twitter.com/__prakashdubey>Twitter</a>
+
+</span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
+</html>
