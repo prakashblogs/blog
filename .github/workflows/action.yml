@@ -12,48 +12,47 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install hugo -y
 
-      - name: change dir for myblog
-        run: |
-          mkdir blog
-          cd blog
-
       - name: checkout blog repo
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }}
           submodules: true
-
-      - name: generate hugo site
-        run: |
-          ls
-          cd myblog
-          hugo -t hugo-theme-texify
-
-      - name: change dir for prakashblogs
-        run: |
-          mkdir prakashblogs
-          cd prakashblogs
+          path: blognew
 
       - name: checkout prakashblogs repo
         uses: actions/checkout@v3
         with:
           repository: prakashblogs/prakashblogs.github.io
+          path: prakashblogs.github.io
 
-      - name: delete blog folder from prakashblogs
+      - name: generate hugo site
         run: |
           pwd
           ls
-          rm -rf blog
-          echo "blog folder deleted "
-          cp myblog/public prakashblogs/blog
-          echo "copied"
+          cd blognew/myblog
+          hugo -t hugo-theme-texify -d ../../blog
+
+      # - name: change dir for prakashblogs
+      #   run: |
+      #     mkdir prakashblogs
+      #     cd prakashblogs
+
+
+      # - name: delete blog folder from prakashblogs
+      #   run: |
+      #     pwd
+      #     ls
+      #     rm -rf blog
+      #     echo "blog folder deleted "
+      #     cp myblog/public prakashblogs/blog
+      #     echo "copied"
       
       - name: commit and push prakashblogs to remote
         run: |
           git config user.name rpeb
           git config user.email prakashdubey1999@gmail.com
-          cd prakashblogs
-          git add .
-          git commit -m "blog added"
-          git push
+          # cd prakashblogs.github.io
+          git -C prakashblogs.github.io add .
+          git -C prakashblogs.github.io commit -m "blog added"
+          git -C prakashblogs.github.io push
 
