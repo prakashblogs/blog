@@ -30,7 +30,7 @@ jobs:
           cd blog/myblog
           pwd
           ls -a
-          hugo -t hugo-theme-texify -d ../../blog
+          hugo -t hugo-theme-texify -d ../../prakashblogs.github.io/blog
 
       # - name: change dir for prakashblogs
       #   run: |
