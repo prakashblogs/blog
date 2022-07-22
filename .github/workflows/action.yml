@@ -55,7 +55,6 @@ jobs:
       #     ls -a
       #     git add .
       #     git commit -m "blog added"
-      #     git push
         
       - name: push to prakashblogs repo
         uses: cpina/github-action-push-to-another-repository@main
