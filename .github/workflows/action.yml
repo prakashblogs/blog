@@ -17,13 +17,13 @@ jobs:
         with:
           repository: ${{ github.repository }}
           submodules: true
-          path: blognew
+          path: x
 
       - name: checkout prakashblogs repo
         uses: actions/checkout@v3
         with:
           repository: prakashblogs/prakashblogs.github.io
-          path: prakashblogs.github.io
+          path: "y"
 
       - name: generate hugo site
         run: |
