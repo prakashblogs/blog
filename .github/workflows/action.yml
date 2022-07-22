@@ -28,6 +28,8 @@ jobs:
         run: |
           ls -R
           cd blog/myblog
+          pwd
+          ls -a
           hugo -t hugo-theme-texify -d ../../blog
 
       # - name: change dir for prakashblogs
@@ -51,6 +53,8 @@ jobs:
           git config user.name rpeb
           git config user.email prakashdubey1999@gmail.com
           cd prakashblogs.github.io
+          pwd
+          ls -a
           git add .
           git commit -m "blog added"
           git push
