@@ -8,7 +8,6 @@ jobs:
     steps:
       - name: install hugo
         run: |
-          ls
           sudo apt-get update -y
           sudo apt-get install hugo -y
 
@@ -17,19 +16,18 @@ jobs:
         with:
           repository: ${{ github.repository }}
           submodules: true
-          path: x
+          path: blog
 
       - name: checkout prakashblogs repo
         uses: actions/checkout@v3
         with:
           repository: prakashblogs/prakashblogs.github.io
-          path: "y"
+          path: prakashblogs.github.io
 
       - name: generate hugo site
         run: |
-          pwd
-          ls
-          cd blognew/myblog
+          ls -R
+          cd blog/myblog
           hugo -t hugo-theme-texify -d ../../blog
 
       # - name: change dir for prakashblogs
@@ -49,12 +47,11 @@ jobs:
       
       - name: commit and push prakashblogs to remote
         run: |
-          pwd
-          ls
+          ls -R
           git config user.name rpeb
           git config user.email prakashdubey1999@gmail.com
-          # cd prakashblogs.github.io
-          git -C prakashblogs.github.io add .
-          git -C prakashblogs.github.io commit -m "blog added"
-          git -C prakashblogs.github.io push
+          cd prakashblogs.github.io
+          git add .
+          git commit -m "blog added"
+          git push
 
