@@ -49,6 +49,8 @@ jobs:
       
       - name: commit and push prakashblogs to remote
         run: |
+          pwd
+          ls
           git config user.name rpeb
           git config user.email prakashdubey1999@gmail.com
           # cd prakashblogs.github.io
