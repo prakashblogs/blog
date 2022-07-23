@@ -1,9 +1,9 @@
 ---
 title: "The Kite Runner"
 date: "2021-11-13"
-categories: 
+categories:
   - "reviews"
-tags: 
+tags:
   - "afghanistan"
   - "book-review"
   - "fiction"
@@ -26,7 +26,7 @@ So later in his life when he gets a chance to make things good, he jumps at it.
 
 The author's writing style is lucid and it holds your attention easily.
 
-Spoiler Alert
+🚨 Spoiler Alert ⚠
 
 The story has a lot of twists and turns, which keep the reader's feet off the ground. One of them is returning of Hassan's mother, Sanauber. She had eloped after Hassan was born, because he had a scarred face like his father, Ali. Sanauber blamed Ali for everything bad. But she returns after 23 years as a old lady, with beaten up face. Other twist comes, when Rahim Khan, Baba's old friend reveals a big secret to Amir long after Baba's death, which is that Hassan and Amir were half brothers, and that answers Amir's long held question, why would Baba care about Hassan so much??
 
