@@ -20,7 +20,7 @@ A docker compose file is a simple text file with `.yml` extension, where we writ
 > version: "3"
 > services:
 >  sqlserver:
->    image: "mcr.microsoft.com/mssql/>server:2019-latest"
+>    image: "mcr.microsoft.com/mssql/server:2019-latest"
 >    container_name: sql
 >    environment:
 >      SA_PASSWORD: "myPassword8"
