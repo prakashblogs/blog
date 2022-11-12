@@ -3,10 +3,11 @@ title: "Wish"
 date: 2022-11-12T15:08:44+05:30
 categories:
   - "poetry"
-  - "mypoems"
 tags:
   - "god"
   - "woman"
+  - "mypoetry"
+  - "poem"
 ---
 
 If god ever comes in my dream
@@ -16,4 +17,4 @@ The endurance of a woman
 Who has seen her rapist
 In the eyes
 And still fought back
-And has lived to a ripe age
+Lived to a ripe age
