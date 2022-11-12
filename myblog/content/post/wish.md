@@ -1,7 +1,6 @@
 ---
 title: "Wish"
 date: 2022-11-12T15:08:44+05:30
-draft: true
 categories:
   - "poetry"
   - "mypoems"
