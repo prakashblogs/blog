@@ -1,7 +1,6 @@
 ---
 title: "Grief"
 date: 2022-09-19T10:48:49+05:30
-draft: true
 categories:
   - "poetry"
 tags:
