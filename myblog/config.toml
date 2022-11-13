@@ -4,7 +4,7 @@
 ###################################################
 
 baseURL = "https://prakashblogs.github.io/blog" # website root path
-disqusShortname = ""               # disqus shortcode
+disqusShortname = "PD"               # disqus shortcode
 enableGitInfo = false              # retrieve last modified date from git commits
 enableRobotsTXT = true             # /robots.txt
 googleAnalytics = ""               # google analytics id
