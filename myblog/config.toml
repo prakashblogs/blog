@@ -59,7 +59,7 @@ Follow me on <a class=link href=https://github.com/rpeb>GitHub</a>,
 
 """ # notes in the website footer
 
-customCSS = []            # path to custom css files, relative to ./static
+customCSS = ["css/custom.css"]            # path to custom css files, relative to ./static
 customJS = []             # path to custom js files, relative to ./static
 dateFormat = "January 2, 2006" # date format, see https://gohugo.io/functions/format/
 fullTextRSS = true        # output full-text (instead of only summary) rss
