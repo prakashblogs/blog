@@ -15,7 +15,8 @@ And offers to grant me a wish
 I would wish for  
 The endurance of a woman  
 Who has seen her rapist  
-In the eyes  
-And lived to a ripe age
+In the eyes
+Fought back
+Lived to a ripe age
 
 — PD
