@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap');
 
-body {
-  background-color: red;
-}
-
 #wrapper {
     font-family: 'Latin Modern Roman', 'Times New Roman', 'Noto Serif SC', serif;
+    font-weight: bolder;
 }
